@@ -1,9 +1,32 @@
 jsonrpcinti
 ===========
 
-A simple and free implementation (client and server) of the Json-rpc 2.0 specification.
+A simple and free implementation (client and server) of the JSON-RPC 2.0 specification.
 
-Examples:
+Dependences
+-----------
+
+* PHP 5.
+* PHP cURL (client).
+
+Notes and decisions
+-------------------
+
+* JsonIntiServer is able to provide only two types of functions: WITH ONLY ONE parameter and WITHOUT parameters. If you need more than one parameter in your remote procedures, you must pass an array or hash.
+* JsonIntiServer only works passing data with RAW POST method. GET method is unsupported.
+* JsonIntiServer don't have any mapping with conventional HTTP errors (like 404, 500, etc).
+* The chosen content-type used for passing json messages is *application/json*.
+
+See also
+--------
+
+* http://www.jsonrpc.org/spec.html 
+* http://en.wikipedia.org/wiki/JSON-RPC
+* http://www.jsonrpc.org/historical/json-rpc-over-http.html
+* https://groups.google.com/forum/#!searchin/json-rpc/http/json-rpc/VNIH0WaxH5U/E55v-T5iy-YJ
+
+Examples
+--------
 
 Example server:
 ```php
