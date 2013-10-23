@@ -1,13 +1,13 @@
 jsonrpcinti
 ===========
 
-A simple and free implementation (client and server) of the JSON-RPC 2.0 specification.
+A simple and free implementation (client and server) of the [JSON-RPC 2.0 specification](http://www.jsonrpc.org/specification).
 
 Dependences
 -----------
 
-* PHP 5.
-* PHP cURL (client).
+* [PHP 5](http://php.net/downloads.php).
+* [PHP cURL](http://php.net/manual/en/book.curl.php) (client).
 
 Notes and decisions
 -------------------
