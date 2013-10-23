@@ -1,5 +1,5 @@
 <?php
-	include 'lib/jsonrpcinti/class.JsonIntiServer.inc.php';
+	include '../class.JsonIntiServer.inc.php';
 
 	function hello()
 	{

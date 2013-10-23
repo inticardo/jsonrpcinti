@@ -1,6 +1,6 @@
 <pre>
 <?php
-	include 'lib/jsonrpcinti/class.JsonIntiClient.inc.php';
+	include '../class.JsonIntiClient.inc.php';
 
 	$url = 'http://url.to/jsonrpcserver.php';
 	$client = new JsonIntiClient($url);
