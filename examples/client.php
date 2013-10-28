@@ -2,8 +2,8 @@
 <?php
 	include '../class.JsonIntiClient.inc.php';
 
-	$url = 'http://localhost/xampp/proyectos/jsonrpcinti/examples/server.php';
-	// $url = 'http://url.to/jsonrpcserver.php';
+	// $url = 'http://localhost/xampp/proyectos/jsonrpcinti/examples/server.php';
+	$url = 'http://url.to/jsonrpcserver.php';
 
 	$client = new JsonIntiClient($url);
 
