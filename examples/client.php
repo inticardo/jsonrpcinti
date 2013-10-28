@@ -2,7 +2,9 @@
 <?php
 	include '../class.JsonIntiClient.inc.php';
 
-	$url = 'http://url.to/jsonrpcserver.php';
+	$url = 'http://localhost/xampp/proyectos/jsonrpcinti/examples/server.php';
+	// $url = 'http://url.to/jsonrpcserver.php';
+
 	$client = new JsonIntiClient($url);
 
 	// Simple request
@@ -54,9 +56,9 @@
 	$rtn = $client->sendRequest('addOp', array(22, 71), $id);
 	echo 'Request id: '.$id."\n";
 	if ($rtn->isError())
-		echo 'Request addOp ('.$rtn->getid().') error: '.$rtn->getErrorMessage()."\n";
+		echo 'Request addOp ('.$rtn->getId().') error: '.$rtn->getErrorMessage()."\n";
 	else
-		echo 'Request addOp ('.$rtn->getid().') result: '.$rtn->getResult()."\n";
+		echo 'Request addOp ('.$rtn->getId().') result: '.$rtn->getResult()."\n";
 
 	echo "BATCH:\n";
 
@@ -73,15 +75,13 @@
 
 	$rtn = $client->sendBatch($batch);
 
-	if ($rtn !== NULL)
+	foreach ($rtn as $item)
 	{
-		foreach ($rtn as $item)
-		{
-			if ($item->isError())
-				echo 'Request ('.$item->getid().') error: '.$item->getErrorMessage()."\n";
-			else
-				echo 'Request ('.$item->getid().') result: '.$item->getResult()."\n";
-		}
+		if ($item->isError())
+			echo 'Request ('.$item->getid().') error: '.$item->getErrorMessage()."\n";
+		else
+			echo 'Request ('.$item->getid().') result: '.$item->getResult()."\n";
 	}
+
 ?>
 </pre>

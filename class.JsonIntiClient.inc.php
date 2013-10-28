@@ -1,13 +1,13 @@
 <?php
 /*
-	JsonIntiClient and result management class
+	JsonIntiClient and result management classes
 	jsonrpcinti project - https://github.com/inticardo/jsonrpcinti
 
 	(c) 2013 - Juan Máiquez Corbalán (Inti / Int_10h) - contacto@int10h.es
 	Licensed under Apache License, Version 2.0, January 2004
 	http://www.apache.org/licenses/
 	
-	Last changes: 2013-10-23
+	Last changes: 2013-10-28
 
 	This is a simple and free implementation of the JSON-RPC 2.0 specification.
 	To see some examples please refer to README.md or ./examples/ directory.
@@ -121,13 +121,13 @@ class JsonIntiClient
 
 	public function sendBatch($array)
 	{
-		if (!is_array($array)) return NULL;
+		if (!is_array($array)) return array();
 
 		$post = json_encode($array);
 		$result = $this->sendAndReceive($post);
 		$decoded = json_decode($result, TRUE);
 
-		if ($decoded === NULL) return NULL;
+		if ($decoded === NULL) return array();
 
 		$rtn = array();
 		foreach ($decoded as $item)

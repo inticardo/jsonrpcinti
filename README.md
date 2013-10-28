@@ -8,6 +8,7 @@ Dependences
 
 * [PHP 5](http://php.net/downloads.php).
 * [PHP cURL](http://php.net/manual/en/book.curl.php) (client).
+* [jQuery](http://jquery.com/) (javascript client)
 
 Notes and decisions
 -------------------
@@ -157,4 +158,109 @@ Example client:
 	}
 ?>
 </pre>
+```
+
+Example javascript client:
+```javascript
+<ul>
+<!-- script -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="../JsonIntiClient.js"></script>
+
+<script>
+	var url = 'http://localhost/xampp/proyectos/jsonrpcinti/examples/server.php';
+	// var url = 'http://url.to/jsonrpcserver.php';
+
+	var client = new JsonIntiClient(url);
+
+	// Simple request
+	client.sendRequest('hello', null, { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request hello error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request hello result: ' + rtn.getResult() + "</li>");
+	});
+
+	// Simple notification
+	client.sendNotification('doSomething', null);
+
+	// Params request
+	client.sendRequest('addOp', [43, 21], { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request addOp error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request addOp result: ' + rtn.getResult() + "</li>");
+	});
+
+	// Unknown method
+	client.sendRequest('unknown', null, { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request unknown error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request unknown result: ' + rtn.getResult() + "</li>");
+	});
+
+	// Incorrect parameters
+	client.sendRequest('addOp', null, { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request addOp error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request addOp result: ' + rtn.getResult() + "</li>");
+	});
+
+	// Incorrect parameters again
+	client.sendRequest('hello', 'lalala', { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request hello error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request hello result: ' + rtn.getResult() + "</li>");
+	});
+
+	// And again (custom)
+	client.sendRequest('addOp', 'lalala', { 'async': false }, function(rtn) {
+		if (rtn.isError()) 
+			document.write('<li>Request addOp error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request addOp result: ' + rtn.getResult() + "</li>");
+	});
+
+	// Retrieving id of request and result
+	client.sendRequest('addOp', [22, 71], { 'async': false, 'getid': true }, function(rtn, id) {
+		document.write('<li>Request id: ' + id + "</li>");
+
+		if (rtn.isError()) 
+			document.write('<li>Request addOp (' + rtn.getId() + ') error: ' + rtn.getErrorMessage() + "</li>");
+		else
+			document.write('<li>Request addOp (' + rtn.getId() + ') result: ' + rtn.getResult() + "</li>");
+	});
+
+	document.write('<li>BATCH:</li>');
+
+	// Doing a batch
+	var batch = [];
+	batch.push( client.constructRequest('hello') );
+	batch.push( client.constructRequest('addOp', [98, 111]) );
+	batch.push( client.constructNotification('doSomething') );
+	batch.push( client.constructRequest('unknown') );
+	batch.push( client.constructNotification('unknown') );
+	batch.push( client.constructRequest('addOp', 'custom error') );
+	batch.push( client.constructRequest('addOp', [3, 8], function(id) {
+		document.write('<li>Last request id: ' + id + '</li>');
+	}) );
+
+	var rtn = client.sendBatch(batch, { 'async': false }, function(rtn){
+		for (var i = 0; i < rtn.length; i++)
+		{
+			var item = rtn[i];
+
+			if (item.isError())
+				document.write('<li>Request (' + item.getId() + ') error: ' + item.getErrorMessage() + "</li>");
+			else
+				document.write('<li>Request (' + item.getId() + ') result: ' + item.getResult() + "</li>");
+		}
+	});
+
+</script>
+<!-- /script -->
+</ul>
 ```

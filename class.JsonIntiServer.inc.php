@@ -7,7 +7,7 @@
 	Licensed under Apache License, Version 2.0, January 2004
 	http://www.apache.org/licenses/
 	
-	Last changes: 2013-10-23
+	Last changes: 2013-10-28
 
 	This is a simple and free implementation of the JSON-RPC 2.0 specification.
 	To see some examples please refer to README.md or ./examples/ directory.
