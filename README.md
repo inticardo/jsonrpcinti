@@ -13,6 +13,7 @@ Dependences
 Notes and decisions
 -------------------
 
+* Due to limitations of PHP functions [json_encode](http://www.php.net/manual/en/function.json-encode.php) & [json_decode](http://www.php.net/manual/en/function.json-decode.php), this classes only works correctly with UTF-8 encoded strings.
 * JsonIntiServer is able to provide only two types of functions: WITH ONLY ONE parameter and WITHOUT parameters. If you need more than one parameter in your remote procedures, you must pass an array or hash.
 * JsonIntiServer only works passing data with RAW POST method. GET method is unsupported.
 * JsonIntiServer don't have any mapping with conventional HTTP errors (like 404, 500, etc).
